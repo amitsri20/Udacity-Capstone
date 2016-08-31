@@ -56,6 +56,11 @@
         <service
             android:name=".widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+            android:exported="false"
+            android:authorities="com.helpplusapp.amit.helpplus"
+            android:name="com.helpplusapp.amit.helpplus.datahelpler.Helpplusprovider"/>
     </application>
 
 

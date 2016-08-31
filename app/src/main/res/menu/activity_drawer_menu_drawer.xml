@@ -24,9 +24,14 @@
                 android:icon="@drawable/ic_bookmark_black_24dp"
                 android:title="Tags" />
             <item
+                android:id="@+id/nav_arch_tags"
+                android:icon="@drawable/ic_bookmark_black_24dp"
+                android:title="Archived tags" />
+            <item
                 android:id="@+id/nav_signout"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="Sign out" />
+
         </menu>
     </item>
 

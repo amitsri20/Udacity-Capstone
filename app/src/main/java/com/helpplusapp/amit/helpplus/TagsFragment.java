@@ -3,6 +3,7 @@ package com.helpplusapp.amit.helpplus;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.helpplusapp.amit.helpplus.datahelpler.HelpPlusDBTable;
+import com.helpplusapp.amit.helpplus.datahelpler.HelpPlusDBTableTable;
 import com.helpplusapp.amit.helpplus.model.Constants;
 import com.helpplusapp.amit.helpplus.model.Tags;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -200,10 +203,19 @@ public class TagsFragment extends Fragment  {
                         int id = mTagsRecyclerView.getChildPosition(view);
                         mFirebaseAdapter.getRef(id).removeValue();
                         mFirebaseAdapter.notifyDataSetChanged();
+
+                        HelpPlusDBTable item = new HelpPlusDBTable();
+                        item.tagName = mFirebaseAdapter.getItem(id).getTagname();
+                        item.timeCreated = mFirebaseAdapter.getItem(id).getTimestampCreated().toString();
+                        Uri uri = getContext().getContentResolver().insert(HelpPlusDBTableTable.CONTENT_URI, HelpPlusDBTableTable.getContentValues(item, false));
+                        if (uri != null) {
+                            Log.d("DB insert", "added new task");
+                        }
                         Snackbar snackbar = Snackbar
                                 .make(view,String.format("%s deleted",mFirebaseAdapter.getItem(id).getTagname()),Snackbar.LENGTH_SHORT);
 
                         snackbar.show();
+
                     }
                 })
                 .setIsVertical(false)

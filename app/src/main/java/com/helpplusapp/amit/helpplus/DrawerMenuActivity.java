@@ -150,7 +150,10 @@ public class DrawerMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
            ft.replace(R.id.fragment_container, new TagsFragment());
            ft.commit();
-        } else if (id == R.id.nav_signout) {
+        } else if (id == R.id.nav_arch_tags) {
+           ft.replace(R.id.fragment_container, new ArchivedTagsFragment());
+           ft.commit();
+        }else if (id == R.id.nav_signout) {
             signOut();
            startActivity(new Intent(this,TwitterLoginActivity.class));
        }
