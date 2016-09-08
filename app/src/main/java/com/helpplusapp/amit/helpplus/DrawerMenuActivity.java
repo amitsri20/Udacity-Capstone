@@ -1,6 +1,7 @@
 package com.helpplusapp.amit.helpplus;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,7 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+import com.wooplr.spotlight.SpotlightView;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -96,6 +98,8 @@ public class DrawerMenuActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, new HomeFragment());
             ft.commit();
+
+        showIntro(fab,"fabIntro");
     }
 
     @Override
@@ -173,4 +177,27 @@ public class DrawerMenuActivity extends AppCompatActivity
         mAuth.signOut();
         Twitter.logOut();
     }
+
+             private void showIntro(View view, String usageId) {
+                 new SpotlightView.Builder(this)
+                         .introAnimationDuration(400)
+                         .performClick(true)
+                         .fadeinTextDuration(400)
+                         .enableRevalAnimation(true)
+                         .headingTvColor(Color.parseColor("#eb273f"))
+                         .headingTvSize(32)
+                         .headingTvText("Write post")
+                         .subHeadingTvColor(Color.parseColor("#ffffff"))
+                         .subHeadingTvSize(16)
+                         .subHeadingTvText("Touch the button to post on social network.")
+                         .maskColor(Color.parseColor("#dc000000"))
+                         .target(view)
+                         .lineAnimDuration(400)
+                         .lineAndArcColor(Color.parseColor("#eb273f"))
+                         .dismissOnTouch(true)
+                         .dismissOnBackPress(true)
+                         .enableDismissAfterShown(true)
+                         .usageId(usageId) //UNIQUE ID
+                         .show();
+             }
 }
